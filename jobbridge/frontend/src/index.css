@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-ink-900 text-mist-100 font-body antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(110,91,255,0.10), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(34,211,238,0.08), transparent 35%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-mist-100;
+  }
+  ::selection {
+    @apply bg-signal-violet/40 text-white;
+  }
+  :focus-visible {
+    outline: 2px solid #6E5BFF;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-ink-800/80 border border-ink-600 rounded-2xl backdrop-blur-sm;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-signal-violet px-5 py-2.5
+    text-sm font-semibold text-white shadow-glow transition
+    hover:bg-signal-violet/90 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-ink-500 bg-ink-800
+    px-5 py-2.5 text-sm font-semibold text-mist-100 transition hover:border-signal-cyan/50
+    hover:text-signal-cyan active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .input-field {
+    @apply w-full rounded-xl border border-ink-500 bg-ink-900/70 px-4 py-2.5 text-sm text-mist-100
+    placeholder:text-mist-500 outline-none transition focus:border-signal-violet focus:ring-1 focus:ring-signal-violet;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-wide text-mist-500;
+  }
+  .tag {
+    @apply inline-flex items-center rounded-full border border-signal-cyan/30 bg-signal-cyan/10
+    px-2.5 py-1 font-mono text-[11px] text-signal-cyan;
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-signal-cyan;
+  }
+}
