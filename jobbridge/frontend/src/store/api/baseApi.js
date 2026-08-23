@@ -2,8 +2,15 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { logout, setCredentials } from "../authSlice";
 
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) return "/api";
+  const cleanUrl = envUrl.replace(/\/+$/, "");
+  return cleanUrl.endsWith("/api") ? cleanUrl : `${cleanUrl}/api`;
+};
+
 const rawBaseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL || "/api",
+  baseUrl: getBaseUrl(),
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     if (token) headers.set("Authorization", `Bearer ${token}`);

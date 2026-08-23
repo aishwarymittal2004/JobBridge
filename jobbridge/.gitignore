@@ -26,3 +26,5 @@ backend/app/uploads/
 # OS
 .DS_Store
 Thumbs.db
+frontend/node_modules/
+node_modules/
