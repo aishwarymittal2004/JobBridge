@@ -23,7 +23,8 @@ export default function CandidateDetails() {
   const accessToken = useSelector((s) => s.auth.accessToken);
 
   const handleDownload = async () => {
-    const res = await fetch(`/api/hr/candidates/${id}/resume/file`, {
+    const baseUrl = import.meta.env.VITE_API_URL || "";
+    const res = await fetch(`${baseUrl}/api/hr/candidates/${id}/resume/file`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     if (!res.ok) return;
