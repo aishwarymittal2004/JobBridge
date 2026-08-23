@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -17,8 +18,17 @@ import HRDashboard from "./pages/hr/Dashboard";
 import CandidateDetails from "./pages/hr/CandidateDetails";
 
 export default function App() {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-ink-900">
+    <div className="min-h-screen bg-white dark:bg-ink-950 text-slate-900 dark:text-mist-100 transition-colors duration-300">
       <Navbar />
       <Routes>
         {/* Public */}

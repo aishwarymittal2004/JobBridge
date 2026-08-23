@@ -134,12 +134,13 @@ def get_career_feed(
         CareerLink.source != "curated"
     ).count()
     
-    if existing < 5:
-        fresh = search_career_pages(job_role, skills, limit=10)
+    if existing < 50:
+        assigned_companies = [c[0].lower() for c in db.query(CareerLink.company_name).distinct().all()]
+        fresh = search_career_pages(job_role, skills, limit=50, exclude_companies=assigned_companies)
         for item in fresh:
             already = (
                 db.query(CareerLink)
-                .filter(CareerLink.career_url == item["career_url"], CareerLink.role == job_role)
+                .filter(CareerLink.company_name == item["company_name"], CareerLink.role == job_role)
                 .first()
             )
             if not already:
@@ -154,8 +155,7 @@ def get_career_feed(
         db.commit()
 
     query = db.query(CareerLink).filter(
-        CareerLink.role == job_role,
-        CareerLink.source != "curated"
+        CareerLink.role == job_role
     )
     if q:
         like = f"%{q}%"

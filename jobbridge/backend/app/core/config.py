@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     
     ADZUNA_APP_ID: str = ""
     ADZUNA_APP_KEY: str = ""
+    
+    LEVER_API_URL: str = "https://api.lever.co/v0/postings/{company}?mode=json"
+    GREENHOUSE_API_URL: str = "https://boards-api.greenhouse.io/v1/boards/{company}/jobs"
+    ASHBY_API_URL: str = "https://api.ashbyhq.com/posting-api/job-board/{company}"
 
     class Config:
         env_file = ".env"
